@@ -1,0 +1,20 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Creation of ECR repo for being able to push pull
+
+Parameters:
+  Ecosystem:
+    Description: Ecosystem for tagging resources
+    Type: String
+
+
+Resources:
+  ECRRepository: 
+    Type: AWS::ECR::Repository
+    Properties: 
+      RepositoryName: !Join ["-", [!Ref Ecosystem, hello, world, ecr]]
+      Tags:
+        - Key: Ecosystem
+          Value: !Ref Ecosystem
+        - Key: StackID
+          Value: !Ref AWS::StackId
